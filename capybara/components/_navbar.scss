@@ -1,0 +1,35 @@
+@use '../variables';
+
+// "%" class doesn't get compiled into css 
+%flex-layout {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+.navbar {
+    // "@extend" works like @mixin, but can't have arguments
+    @extend %flex-layout;
+    padding: variables.$base-padding variables.$base-padding * 2;
+    box-shadow: variables.$base-box-shadow;
+
+    .site-title {
+        font-size: variables.$font-size-lg;
+    }
+
+    // extend the flex rules for .containers inside a .navbar
+    .container {
+        @extend %flex-layout;
+    }
+}
+
+
+@each $key,
+$val in variables.$colors {
+    .navbar-#{$key} {
+        @extend .navbar;
+        background-color: $val;
+    }
+}

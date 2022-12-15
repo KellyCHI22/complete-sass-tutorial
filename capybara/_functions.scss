@@ -1,0 +1,6 @@
+// define a function using @function and return a value with @return
+@function light-comp($color) {
+    $complement: complement($color);
+    $light-complement: lighten($complement, 30%);
+    @return $light-complement;
+}

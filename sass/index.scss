@@ -1,0 +1,6 @@
+@use 'capybara/variables' with ($secondary: rgb(152, 57, 197),
+    $base-padding: 0.8rem,
+    $base-border-thickness: 2.5px,
+);
+
+@use 'capybara';

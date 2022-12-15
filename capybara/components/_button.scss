@@ -1,0 +1,51 @@
+@use '../variables';
+@use '../functions';
+
+// can set default value to the param
+@mixin btn($bg-color: #e2e2e2) {
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-block;
+    border: 0;
+    padding: variables.$base-padding variables.$base-padding * 2;
+    border-radius: variables.$base-border-radius;
+    // using a variable to pass in the argument
+    background-color: $bg-color;
+}
+
+.btn {
+    // not indicating an argument, use the default value
+    @include btn;
+}
+
+@each $key,
+$val in variables.$colors {
+    .btn-#{$key} {
+        // pass in $val as bg-color
+        @include btn($val);
+
+        &:hover {
+            // lighten() lightens a color by n%
+            background-color: darken($val, 5);
+        }
+    }
+
+    .btn-outlined-#{$key} {
+        @include btn(#fff);
+        border: variables.$base-border-thickness solid $val;
+
+        &:hover {
+            background-color: $val;
+        }
+    }
+
+    .btn-complement-#{$key} {
+        @include btn($val);
+        color: functions.light-comp($val);
+
+        &:hover {
+            color: $val;
+            background-color: functions.light-comp($val);
+        }
+    }
+}
